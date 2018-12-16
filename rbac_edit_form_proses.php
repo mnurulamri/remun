@@ -21,6 +21,7 @@
 include('dbConfig.php');
 
 //proses update user role
+//set array role
 $role = array(
 	'Admin' => 1,
 	'Prodi' => 2,
@@ -28,33 +29,40 @@ $role = array(
 	'PPAA' => 4
 );
 
+//set variabel nip dan nama
 $nip = $_POST['nip'];
 $nama = $_POST['nama'];
+
+//bersihkan nip dari tabel user_role
 $sql = "DELETE FROM user_role WHERE user_nip = '$nip'";
 $result = $db->query($sql) or die($db->error);
 
-//menghilangkan tanda koma ',' pada akhir query pada looping array terakhir
+//jika ada post rolenya maka insert data role
 $count = count($_POST['role']);
-
-$sql = "INSERT INTO user_role VALUES";
-$i=1;
-foreach($_POST['role'] as $k => $v){
-	//$sql.= '(nip="'.$nip.'", role_id="'.$role[$v].'"),';
-	if($i == $count){
-		$sql.= '("'.$nip.'", "'.$role[$v].'")';
-	} else {
-		$sql.= '("'.$nip.'", "'.$role[$v].'"),';
+if ($count > 0) {
+	//set pre query insert data role
+	$sql = "INSERT INTO user_role VALUES";
+	
+	//menghilangkan tanda koma ',' pada akhir nilai query pada looping array terakhir biar kagak error
+	$i=1;
+	foreach($_POST['role'] as $k => $v){
+		//$sql.= '(nip="'.$nip.'", role_id="'.$role[$v].'"),';
+		if($i == $count){
+			$sql.= '("'.$nip.'", "'.$role[$v].'")';
+		} else {
+			$sql.= '("'.$nip.'", "'.$role[$v].'"),';
+		}
+		$i++;
 	}
-	$i++;
+	$result = $db->query($sql) or die($db->error);
 }
-//print_r($sql);
-$result = $db->query($sql) or die($db->error);
 
 // proses update role program studi / permission
 $sql = "DELETE FROM user_permission WHERE user_nip = '$nip'";
 $result = $db->query($sql) or die($db->error);
-$count = count($_POST['prodi']);
 
+//jika ada contrengan prodinya maka insert permission prodi
+$count = count($_POST['prodi']);
 if ($count > 0) {
 	$sql = "INSERT INTO user_permission VALUES";
 	$i=1;
@@ -67,12 +75,12 @@ if ($count > 0) {
 		}
 		$i++;
 	}
+	$result = $db->query($sql) or die($db->error);
 } 
-$result = $db->query($sql) or die($db->error);
 
 //$sql.= ')';
 
-//set tampilan role sesuai updetan
+//set role pada tampilan utama daftar nama user sesuai dg data yg sudah diupdate
 foreach ($_POST['role'] as $k => $v){
 	$post_role[$v] = 1; //yang ada data rolenya tandain
 }
