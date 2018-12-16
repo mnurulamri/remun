@@ -42,12 +42,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username']))	header("Locati
 				datatype: "json", //Datatype yg di gunakan
 				height: "auto", //Mengset Tinggi table jadi Auto menyesuaikan dengan isi table
 				mtype: "GET",
-				colNames: ['edit','hapus','id','Nama Pengajar','Keterangan Honor','Jml Mhs/Item','Harga Satuan','Honor'],
+				colNames: ['edit','hapus','id','Nama Pengajar','Jenis Honor','Keterangan Honor','Jml Mhs/Item','Harga Satuan','Honor'],
 				colModel: [						
 					{name:'act', sortable:false, width: 30, align: 'center'},
 					{name:'delete', sortable:false, width: 30, align: 'center'},
 					{name:'id', key:true, index:'id', hidden:true,editable:false,editrules:{required:true}},
 					{name:'nama_pengajar', index:'nama_pengajar'},
+					{name:'kd_bimbingan', index:'kd_bimbingan', width: 100},
 					{name:'jenis_bimbingan', index:'jenis_bimbingan', width: 250},
 					{name:'jml_mhs',index:'jml_mhs', align:'center', width: 75},
 					{name:'harga_satuan',index:'harga_satuan',align:'right', width: 100},

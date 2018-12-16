@@ -94,7 +94,7 @@
 	$start = $limit*$page - $limit;
 	if($start <0) $start = 0;
 	
-	$query = "SELECT a.id, nama_pengajar, jenis_bimbingan, jml_mhs, harga_satuan, honor, trans
+	$query = "SELECT a.id, nama_pengajar, kd_bimbingan, jenis_bimbingan, jml_mhs, harga_satuan, honor, trans
 			  FROM bimbingan a, master_pengajar c
 			  WHERE 
 				a.nip = c.nip and 
@@ -116,14 +116,14 @@
 			$delete='<a href="bimbingan_delete.php?id='.$line["id"].'" class="add"><span class="ui-icon ui-icon-trash"></span></a>';
 			$honor = $honor + $line["honor"];
 			$responce->rows[$i]['id'] = $line["id"];
-			$responce->rows[$i]['cell'] = array($edit,$delete,$line["id"],$line["nama_pengajar"],$line["jenis_bimbingan"],$line["jml_mhs"],number_format($line["harga_satuan"]),number_format($line["honor"]));
+			$responce->rows[$i]['cell'] = array($edit,$delete,$line["id"],$line["nama_pengajar"],$line["kd_bimbingan"],$line["jenis_bimbingan"],$line["jml_mhs"],number_format($line["harga_satuan"]),number_format($line["honor"]));
 			$i++;		
 		} else {
 			$edit='<a href="#'.$line["id"].'" class=""><span class="ui-icon ui-icon-locked"></span></a>';
 			$delete='<a href="#'.$line["id"].'" class=""><span class="ui-icon ui-icon-locked"></span></a>';
 			$honor = $honor + $line["honor"];
 			$responce->rows[$i]['id'] = $line["id"];
-			$responce->rows[$i]['cell'] = array($edit,$delete,$line["id"],$line["nama_pengajar"],$line["jenis_bimbingan"],$line["jml_mhs"],number_format($line["harga_satuan"]),number_format($line["honor"]));
+			$responce->rows[$i]['cell'] = array($edit,$delete,$line["id"],$line["nama_pengajar"],$line["kd_bimbingan"],$line["jenis_bimbingan"],$line["jml_mhs"],number_format($line["harga_satuan"]),number_format($line["honor"]));
 			$i++;			
 		}
 
