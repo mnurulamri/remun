@@ -21,7 +21,7 @@ function searchFilter(page_num) {
 
 <br><br><br><br>
 	
-	<div class="blink_me">U N D E R C O N S T R U C T I O N</div>
+	<div class="blink_me">B E T A</div>
 <div class="post-search-panel">
 	<input type="text" value="Filter" style="text-align:center; color:#fff; background-color:#444; border:2px solid #444;" size="1"/>
     <input type="text" id="keywords" placeholder="keywords" onkeyup="searchFilter()"/>
@@ -35,6 +35,17 @@ function searchFilter(page_num) {
     <div class="loading-overlay"><div class="overlay-content">Loading.....</div></div>
     <div id="posts_content"></div>
 </div>
+<br>
+<hr style="width: 70%; margin:auto">
+<br>
+<div style="margin:auto; padding:10px; width:70%; background:#ddd; text-align:center; font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; ">
+	Tambah Data Pengajar<br><br>
+    <input type="text" id="nip_baru" placeholder="NIP/NUP" value=""/>
+    <input type="text" id="nama_baru" placeholder="Nama Pengajar" value=""/>
+    <input type="button" id="add_pengajar" value="+"/>
+</div>
+<div class="status"><div class="overlay-content"></div></div>
+
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -136,12 +147,26 @@ $(document).ready(function(){
     $(document).on('click', '.prodi', function(){
         $('.check:checkbox').not(this).prop('checked', this.checked);
     })
-    /*
-    $(document).on('click', '.role', function(){
-        var id = $(this).data("id")
-        alert(id)
+    
+    $(document).on('click', '#add_pengajar', function(){
+        var nip = $("#nip_baru").val()
+        var nama = $("#nama_baru").val()
+        //alert(nip+" "+nama)
+    	$.ajax({
+    		type: "POST",
+    		url: "rbac_add_pengajar.php",
+    		data:{nip:nip, nama:nama},
+    		beforeSend: function () {
+            	$('.status').show()
+        	},
+    		success:function(data){
+    			$('.overlay-content').html(data)
+            	$('.status').fadeOut("slow")
+            	fetch_data();
+    		}
+    	})
     })
-	*/
+	
 })
 
 
