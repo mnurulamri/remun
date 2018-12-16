@@ -18,6 +18,8 @@ $nip = $_POST["nip"];
 
 $kd_organisasi = $_SESSION["kode"];
 
+$kd_bimbingan = $_POST["kd_bimbingan"];
+
 $jenis_bimbingan = $_POST["jenis_bimbingan"];
 
 $jml_mhs = $_POST["jml_mhs"];
@@ -32,9 +34,9 @@ switch ($oper) {
 	
 	case 'add':
 		
-		$q = mysql_query("INSERT INTO bimbingan (tahun, bulan, kd_organisasi, nip, jenis_bimbingan, jml_mhs, harga_satuan, honor)
+		$q = mysql_query("INSERT INTO bimbingan (tahun, bulan, kd_organisasi, nip, kd_bimbingan, jenis_bimbingan, jml_mhs, harga_satuan, honor)
 		
-					      VALUES($tahun, '$bulan','$kd_organisasi', '$nip', '$jenis_bimbingan', $jml_mhs, $harga_satuan, $honor)");
+					      VALUES($tahun, '$bulan','$kd_organisasi', '$nip', '$kd_bimbingan', '$jenis_bimbingan', $jml_mhs, $harga_satuan, $honor)");
 		
 		break;
 	
@@ -42,7 +44,9 @@ switch ($oper) {
 		
 		$q = mysql_query("UPDATE bimbingan 
 		
-						  SET jenis_bimbingan = '$jenis_bimbingan',
+						  SET kd_bimbingan  = '$kd_bimbingan',
+
+						  	  jenis_bimbingan = '$jenis_bimbingan',
 						  
 						      jml_mhs = $jml_mhs,
 							  
