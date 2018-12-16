@@ -26,7 +26,7 @@ $(document).ready(function(){
 	if(!session_id()) session_start();
 	$kd_organisasi = $_SESSION["kode"];	
 	$id = $_GET['id'];	
-	$sql = "SELECT a.tahun as tahun, a.bulan as bulan, a.nip as nip, a.id as id, nama_pengajar, jenis_bimbingan, jml_mhs, harga_satuan, honor
+	$sql = "SELECT a.tahun as tahun, a.bulan as bulan, a.nip as nip, a.id as id, nama_pengajar, kd_bimbingan, jenis_bimbingan, jml_mhs, harga_satuan, honor
 			  FROM bimbingan a, master_pengajar c
 			  WHERE 
 				a.nip = c.nip and 				
@@ -127,6 +127,34 @@ $(document).ready(function(){
 				<td id="label">NIP</td>
 				<td>:</td>
 				<td><input type="text" name="nip" readonly="readonly" value="<?echo $row['nip']?>" id="nip" class="ui-widget ui-widget-content padding ui-corner-all"></td>
+			</tr>
+			<tr>
+				<td id="label">Jenis Honor</td>
+				<td>:</td>
+				<td>
+					<?
+					switch ($row['kd_bimbingan']) {
+						case 'bimbingan':
+							$ket = 'Bimbingan';
+							break;
+						case 'menguji':
+							$ket = 'Menguji';
+							break;
+						case 'insentif':
+							$ket = 'Insentif Kehadiran (Khusus KKI)';
+							break;
+						default:
+							$ket = '?';
+							break;
+					}
+					?>
+					<select name="kd_bimbingan" id="kd_bimbingan" class="ui-widget ui-widget-content padding ui-corner-all">
+						<option value="<?echo $row['kd_bimbingan']?>"><?echo $ket?></option>
+						<option value="bimbingan">Bimbingan</option>
+						<option value="menguji">Menguji</option>
+						<option value="insentif">Insentif Kehadiran (Khusus KKI)</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td id="label">Keterangan Honor</td>

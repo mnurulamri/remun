@@ -116,6 +116,17 @@ function OpenHargaSatuan(){
 				</td>
 			</tr>
 			<tr>
+				<td id="label">Jenis Honor</td>
+				<td>: </td>
+				<td>
+					<select name="kd_bimbingan" id="kd_bimbingan" class="ui-widget ui-widget-content padding ui-corner-all" onchange="">
+						<option value="bimbingan">Bimbingan</option>
+						<option value="menguji">Menguji</option>
+						<option value="insentif">Insentif Kehadiran (Khusus KKI)</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td id="label">Nama Pengajar</td>
 				<td>:</td>
 				<td>
